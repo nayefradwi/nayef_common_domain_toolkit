@@ -13,13 +13,25 @@ abstract class Result<T> {
   bool get isSuccess => this is ResultWithData<T>;
   bool get isError => this is ResultWithError<T>;
 
-  Future<R> fold<R>({
+  Future<R> foldAsync<R>({
     required Future<R> Function(T data) onSuccess,
     required Future<R> Function(ResultError error) onError,
   }) async {
     try {
       if (isError) return await onError((this as ResultWithError<T>).error);
       return await onSuccess((this as ResultWithData<T>).data);
+    } catch (e) {
+      return onError(UnknownError(message: e.toString()));
+    }
+  }
+
+  R fold<R>({
+    required R Function(T data) onSuccess,
+    required R Function(ResultError error) onError,
+  }) {
+    try {
+      if (isError) return onError((this as ResultWithError<T>).error);
+      return onSuccess((this as ResultWithData<T>).data);
     } catch (e) {
       return onError(UnknownError(message: e.toString()));
     }
