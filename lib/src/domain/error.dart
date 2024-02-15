@@ -1,3 +1,5 @@
+import '../../nayef_common_domain_toolkit.dart';
+
 const String unknownErrorCode = "unknown_error";
 
 abstract class ResultError {
@@ -10,7 +12,9 @@ abstract class ResultError {
     this.code,
     this.statusCode = 0,
     this.stackTrace,
-  });
+  }) {
+    logger.severe(message, this, stackTrace);
+  }
 
   @override
   String toString() {
