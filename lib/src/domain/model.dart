@@ -24,3 +24,35 @@ class LimitOffsetPage<T> extends PaginatedModel<T> {
     hasNextPage = other.hasNextPage;
   }
 }
+
+class CursorPage<T> extends PaginatedModel<T> {
+  String? cursor;
+  CursorPage({
+    required super.items,
+    required this.cursor,
+    required super.hasNextPage,
+  });
+
+  void merge(CursorPage<T> other) {
+    items.addAll(other.items);
+    cursor = other.cursor;
+    hasNextPage = other.hasNextPage;
+  }
+}
+
+class DoubleCursorPage<T> extends PaginatedModel<T> {
+  String? before, after;
+  DoubleCursorPage({
+    required super.items,
+    required this.before,
+    required this.after,
+    required super.hasNextPage,
+  });
+
+  void merge(DoubleCursorPage<T> other) {
+    items.addAll(other.items);
+    before = other.before;
+    after = other.after;
+    hasNextPage = other.hasNextPage;
+  }
+}

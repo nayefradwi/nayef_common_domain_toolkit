@@ -27,3 +27,37 @@ class LimitOffsetPageMapper<T, P> implements _LimitOffsetPageMapper<T, P> {
     );
   }
 }
+
+typedef _CursorPageMapper<T, P> = IMapper<CursorPage<T>, CursorPage<P>>;
+
+class CursorPageMapper<T, P> implements _CursorPageMapper<T, P> {
+  final IListMapper<T, P> listMapper;
+  CursorPageMapper(this.listMapper);
+  @override
+  CursorPage<T> from(CursorPage<P> other) {
+    final items = listMapper.fromList(other.items);
+    return CursorPage<T>(
+      items: items,
+      hasNextPage: other.hasNextPage,
+      cursor: other.cursor,
+    );
+  }
+}
+
+typedef _DoubleCursorPageMapper<T, P>
+    = IMapper<DoubleCursorPage<T>, DoubleCursorPage<P>>;
+
+class DoubleCursorPageMapper<T, P> implements _DoubleCursorPageMapper<T, P> {
+  final IListMapper<T, P> listMapper;
+  DoubleCursorPageMapper(this.listMapper);
+  @override
+  DoubleCursorPage<T> from(DoubleCursorPage<P> other) {
+    final items = listMapper.fromList(other.items);
+    return DoubleCursorPage<T>(
+      items: items,
+      hasNextPage: other.hasNextPage,
+      before: other.before,
+      after: other.after,
+    );
+  }
+}
