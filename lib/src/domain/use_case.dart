@@ -22,13 +22,13 @@ abstract class IStreamUseCase<T, P> {
 
   void startStream({required P param}) {
     try {
-      execute(param);
+      processStream(param);
     } catch (e) {
       _streamController.add(Result.exception(e));
     }
   }
 
-  void execute(P param);
+  void processStream(P param);
 
   void stopStream() => _streamController.close();
 }
