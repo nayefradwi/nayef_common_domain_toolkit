@@ -2,7 +2,19 @@ import 'dart:async';
 
 import 'result.dart';
 
-abstract class IUseCase<T, P> {
+mixin IUseCase<T, P> {
+  Result<T> call({required P param}) {
+    try {
+      return execute(param);
+    } catch (e) {
+      return Result.exception(e);
+    }
+  }
+
+  Result<T> execute(P param);
+}
+
+mixin IFutureUseCase<T, P> {
   FutureResult<T> call({required P param}) async {
     try {
       return await execute(param);
@@ -14,7 +26,7 @@ abstract class IUseCase<T, P> {
   FutureResult<T> execute(P param);
 }
 
-abstract class IStreamUseCase<T, P> {
+mixin IStreamUseCase<T, P> {
   final StreamController<Result<T>> _streamController =
       StreamController.broadcast();
 
@@ -31,4 +43,6 @@ abstract class IStreamUseCase<T, P> {
   void processStream(P param);
 
   void stopStream() => _streamController.close();
+
+  void emit(Result<T> result) => _streamController.add(result);
 }
