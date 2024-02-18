@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nayef_common_widgets/src/context_extension.dart';
 
-class PrimaryButton extends StatelessWidget {
+class FilledButton extends StatelessWidget {
   final bool isLoading;
   final String label;
   final void Function()? onClick;
@@ -13,7 +13,7 @@ class PrimaryButton extends StatelessWidget {
   final IconData? prefixIcon, suffixIcon;
   final Widget? prefix, suffix;
   final bool fillWidth, isCompact;
-  const PrimaryButton({
+  const FilledButton({
     super.key,
     required this.label,
     this.onClick,
@@ -56,32 +56,19 @@ class PrimaryButton extends StatelessWidget {
             isLoading: isLoading,
             progressSize: progressSize,
             progressStrokeWidth: progressStrokeWidth,
-            fontSize: fontSize,
-            fontWeight: fontWeight,
-            backgroundColor: backgroundColor,
-            foregroundColor: foregroundColor,
+            backgroundColor: backgroundColor ?? context.colorScheme.primary,
+            foregroundColor: foregroundColor ?? context.colorScheme.onPrimary,
             isCompact: isCompact,
             borderSide: borderSide,
-            child: prefixIcon == null &&
-                    prefix == null &&
-                    suffixIcon == null &&
-                    suffix == null
-                ? Text(
-                    label,
-                    style: TextStyle(
-                      fontSize: fontSize,
-                      fontWeight: fontWeight,
-                    ),
-                  )
-                : _ButtonRowRow(
-                    prefixIcon: prefixIcon,
-                    label: label,
-                    fontSize: fontSize,
-                    fontWeight: fontWeight,
-                    prefix: prefix,
-                    suffix: suffix,
-                    suffixIcon: suffixIcon,
-                  ),
+            child: _ButtonRowRow(
+              prefixIcon: prefixIcon,
+              label: label,
+              fontSize: fontSize,
+              fontWeight: fontWeight,
+              prefix: prefix,
+              suffix: suffix,
+              suffixIcon: suffixIcon,
+            ),
           ),
         ],
       ),
@@ -114,7 +101,7 @@ class _ButtonRowRow extends StatelessWidget {
         const SizedBox(width: 4),
         if (prefixIcon != null) Icon(prefixIcon, size: 20),
         if (prefix != null) prefix!,
-        const SizedBox(width: 4),
+        if (prefix != null || prefixIcon != null) const SizedBox(width: 4),
         Flexible(
           child: Text(
             label,
@@ -124,7 +111,7 @@ class _ButtonRowRow extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 4),
+        if (suffix != null || suffixIcon != null) const SizedBox(width: 4),
         if (suffixIcon != null) Icon(suffixIcon, size: 20),
         if (suffix != null) suffix!,
         const SizedBox(width: 4),
@@ -142,8 +129,6 @@ class _PrimaryButton extends StatelessWidget {
     required this.progressSize,
     required this.progressStrokeWidth,
     required this.child,
-    required this.fontSize,
-    required this.fontWeight,
     required this.backgroundColor,
     required this.foregroundColor,
     required this.isCompact,
@@ -156,20 +141,15 @@ class _PrimaryButton extends StatelessWidget {
   final bool isLoading;
   final double progressSize;
   final double progressStrokeWidth;
-  final double fontSize;
-  final FontWeight fontWeight;
   final Widget child;
-  final Color? backgroundColor, foregroundColor;
+  final Color backgroundColor, foregroundColor;
   final BorderSide? borderSide;
   final bool isCompact;
 
   @override
   Widget build(BuildContext context) {
-    Color backgroundColor = this.backgroundColor ?? context.colorScheme.primary;
-    Color foregroundColor =
-        this.foregroundColor ?? context.colorScheme.onBackground;
     return TextButton(
-      onPressed: isLoading ? () {} : onClick,
+      onPressed: isLoading ? null : onClick,
       style: TextButton.styleFrom(
         backgroundColor: backgroundColor,
         foregroundColor: foregroundColor,
