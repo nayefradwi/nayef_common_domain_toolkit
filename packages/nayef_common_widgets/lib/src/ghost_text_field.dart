@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nayef_common_widgets/src/context_extension.dart';
 
-class OutlineTextField extends StatelessWidget {
+class GhostTextField extends StatelessWidget {
   final String label;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
@@ -20,15 +20,9 @@ class OutlineTextField extends StatelessWidget {
   final Widget? prefix;
   final TextCapitalization textCapitalization;
   final List<TextInputFormatter>? inputFormatters;
-  final Color? textColor,
-      enabledColor,
-      disabledColor,
-      errorColor,
-      focusedColor,
-      cursorColor;
+  final Color? textColor, cursorColor;
   final FontWeight fontWeight;
-  final bool hideInActiveBorder;
-  const OutlineTextField({
+  const GhostTextField({
     required this.label,
     super.key,
     this.controller,
@@ -52,12 +46,7 @@ class OutlineTextField extends StatelessWidget {
     this.prefix,
     this.textCapitalization = TextCapitalization.none,
     this.textColor,
-    this.enabledColor,
-    this.disabledColor,
-    this.errorColor,
-    this.focusedColor,
     this.fontWeight = FontWeight.w500,
-    this.hideInActiveBorder = false,
     this.cursorColor,
   });
 
@@ -85,30 +74,12 @@ class OutlineTextField extends StatelessWidget {
         color: textColor ?? context.colorScheme.onBackground,
       ),
       decoration: InputDecoration(
-        disabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: disabledColor ?? context.colorScheme.outline,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: enabledColor ?? context.colorScheme.onSecondary,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: focusedColor ?? context.colorScheme.onBackground,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: errorColor ?? context.colorScheme.error,
-          ),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: errorColor ?? context.colorScheme.error,
-          ),
+        disabledBorder: const OutlineInputBorder(borderSide: BorderSide.none),
+        enabledBorder: const OutlineInputBorder(borderSide: BorderSide.none),
+        focusedBorder: const OutlineInputBorder(borderSide: BorderSide.none),
+        errorBorder: const OutlineInputBorder(borderSide: BorderSide.none),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderSide: BorderSide.none,
         ),
         errorText: errorMessage,
         errorMaxLines: errorMaxLines,

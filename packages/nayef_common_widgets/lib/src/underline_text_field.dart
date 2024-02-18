@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nayef_common_widgets/src/context_extension.dart';
 
-class PrimaryTextField extends StatelessWidget {
+class UnderlineTextField extends StatelessWidget {
   final String label;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
@@ -20,9 +20,14 @@ class PrimaryTextField extends StatelessWidget {
   final Widget? prefix;
   final TextCapitalization textCapitalization;
   final List<TextInputFormatter>? inputFormatters;
-  final Color? textColor, enabledColor, disabledColor, errorColor, focusedColor;
+  final Color? textColor,
+      enabledColor,
+      disabledColor,
+      errorColor,
+      focusedColor,
+      cursorColor;
   final FontWeight fontWeight;
-  const PrimaryTextField({
+  const UnderlineTextField({
     required this.label,
     super.key,
     this.controller,
@@ -51,6 +56,7 @@ class PrimaryTextField extends StatelessWidget {
     this.errorColor,
     this.focusedColor,
     this.fontWeight = FontWeight.w500,
+    this.cursorColor,
   });
 
   @override
@@ -71,6 +77,7 @@ class PrimaryTextField extends StatelessWidget {
       obscureText: isObscureText,
       maxLines: maxLines,
       inputFormatters: inputFormatters,
+      cursorColor: cursorColor,
       style: TextStyle(
         fontWeight: fontWeight,
         color: textColor ?? context.colorScheme.onBackground,
