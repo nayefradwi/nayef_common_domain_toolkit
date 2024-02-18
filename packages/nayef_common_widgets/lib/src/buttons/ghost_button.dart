@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nayef_common_widgets/src/context_extension.dart';
 
-class FilledButton extends StatelessWidget {
+class GhostButton extends StatelessWidget {
   final bool isLoading;
   final String label;
   final void Function()? onClick;
@@ -13,7 +13,7 @@ class FilledButton extends StatelessWidget {
   final IconData? prefixIcon, suffixIcon;
   final Widget? prefix, suffix;
   final bool fillWidth, isCompact;
-  const FilledButton({
+  const GhostButton({
     super.key,
     required this.label,
     this.onClick,

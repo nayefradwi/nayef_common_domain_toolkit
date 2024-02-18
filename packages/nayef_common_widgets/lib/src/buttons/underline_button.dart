@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nayef_common_widgets/src/context_extension.dart';
 
-class OutlineButton extends StatelessWidget {
+class UnderlineButton extends StatelessWidget {
   final bool isLoading;
   final String label;
   final void Function()? onClick;
@@ -11,7 +11,7 @@ class OutlineButton extends StatelessWidget {
   final Color? foregroundColor;
   final IconData? prefixIcon, suffixIcon;
   final Widget? prefix, suffix;
-  const OutlineButton({
+  const UnderlineButton({
     super.key,
     required this.label,
     this.onClick,
