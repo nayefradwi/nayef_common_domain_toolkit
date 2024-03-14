@@ -5,24 +5,28 @@ class GhostButton extends StatelessWidget {
   final bool isLoading;
   final String label;
   final void Function()? onClick;
-  final double radius, progressSize, progressStrokeWidth, fontSize;
+  final double radius;
+  final double progressSize;
+  final double progressStrokeWidth;
+  final double fontSize;
   final FontWeight fontWeight;
-  final EdgeInsets innerPadding, padding;
+  final EdgeInsets innerPadding;
+  final EdgeInsets padding;
   final Color? foregroundColor;
   final BorderSide? borderSide;
-  final IconData? prefixIcon, suffixIcon;
-  final Widget? prefix, suffix;
-  final bool fillWidth, isCompact;
+  final IconData? prefixIcon;
+  final IconData? suffixIcon;
+  final Widget? prefix;
+  final Widget? suffix;
+  final bool fillWidth;
+  final bool isCompact;
   const GhostButton({
-    super.key,
     required this.label,
+    super.key,
     this.onClick,
     this.isLoading = false,
     this.radius = 12,
-    this.innerPadding = const EdgeInsets.symmetric(
-      horizontal: 16,
-      vertical: 12,
-    ),
+    this.innerPadding = EdgeInsets.zero,
     this.padding = const EdgeInsets.symmetric(horizontal: 16),
     this.progressSize = 12,
     this.progressStrokeWidth = 2,
@@ -36,7 +40,14 @@ class GhostButton extends StatelessWidget {
     this.prefix,
     this.suffixIcon,
     this.suffix,
-  }) : assert(prefixIcon == null || prefix == null);
+  })  : assert(
+          prefixIcon == null || prefix == null,
+          'You can only provide either prefixIcon or prefix, not both',
+        ),
+        assert(
+          suffixIcon == null || suffix == null,
+          'You can only provide either suffixIcon or suffix, not both',
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +67,7 @@ class GhostButton extends StatelessWidget {
             progressSize: progressSize,
             progressStrokeWidth: progressStrokeWidth,
             backgroundColor: context.colorScheme.background,
-            foregroundColor:
-                foregroundColor ?? context.colorScheme.onBackground,
+            foregroundColor: foregroundColor ?? context.colorScheme.primary,
             isCompact: isCompact,
             borderSide: borderSide,
             child: _ButtonRowRow(
@@ -87,8 +97,10 @@ class _ButtonRowRow extends StatelessWidget {
     this.suffix,
   });
 
-  final IconData? prefixIcon, suffixIcon;
-  final Widget? prefix, suffix;
+  final IconData? prefixIcon;
+  final IconData? suffixIcon;
+  final Widget? prefix;
+  final Widget? suffix;
   final String label;
   final double fontSize;
   final FontWeight fontWeight;
@@ -142,7 +154,8 @@ class _PrimaryButton extends StatelessWidget {
   final double progressSize;
   final double progressStrokeWidth;
   final Widget child;
-  final Color backgroundColor, foregroundColor;
+  final Color backgroundColor;
+  final Color foregroundColor;
   final BorderSide? borderSide;
   final bool isCompact;
 
@@ -192,7 +205,7 @@ class _LoadingIndicator extends StatelessWidget {
       width: progressSize,
       child: CircularProgressIndicator(
         strokeWidth: progressStrokeWidth,
-        color: foregroundColor ?? context.colorScheme.onPrimary,
+        color: foregroundColor ?? context.colorScheme.primary,
       ),
     );
   }

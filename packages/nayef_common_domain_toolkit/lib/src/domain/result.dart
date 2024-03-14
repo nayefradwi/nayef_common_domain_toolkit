@@ -1,4 +1,4 @@
-import 'error.dart';
+import 'package:nayef_common_domain_toolkit/src/domain/error.dart';
 
 typedef FutureResult<T> = Future<Result<T>>;
 typedef ResultStream<T> = Stream<Result<T>>;
@@ -7,7 +7,7 @@ abstract class Result<T> {
   Result._();
   factory Result.success(T data) => ResultWithData<T>._(data);
   factory Result.error(ResultError error) => ResultWithError<T>._(error);
-  factory Result.exception(e) =>
+  factory Result.exception(Object e) =>
       ResultWithError<T>._(UnknownError(message: e.toString()));
 
   bool get isSuccess => this is ResultWithData<T>;

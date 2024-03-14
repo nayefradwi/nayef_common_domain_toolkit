@@ -1,8 +1,6 @@
-library nayef_common_widgets;
-
-export 'src/buttons/filled_button.dart';
 export 'src/buttons/ghost_button.dart';
 export 'src/buttons/outline_button.dart';
+export 'src/buttons/primary_button.dart';
 export 'src/buttons/underline_button.dart';
 export 'src/context_extension.dart';
 export 'src/text_fields/filled_text_field.dart';
@@ -22,4 +20,3 @@ export 'src/text_fields/underline_text_field.dart';
 * - Snackbars (Title, Content, Action)
 
 */
-

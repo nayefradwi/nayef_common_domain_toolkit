@@ -7,26 +7,32 @@ class UnderlineTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final Widget? suffix;
-  final bool isObscureText, isDense;
+  final bool isObscureText;
+  final bool isDense;
   final String? errorMessage;
   final TextInputAction? textInputAction;
   final void Function(String value)? onSubmitted;
   final void Function(String value)? onChanged;
   final void Function()? onEditingComplete;
   final List<String>? autofillHints;
-  final int? maxLines, errorMaxLines;
-  final bool isReadOnly, isEnabled, autofocus;
+  final int? maxLines;
+  final int? errorMaxLines;
+  final bool isReadOnly;
+  final bool isEnabled;
+  final bool autofocus;
   final FocusNode? focusNode;
   final Widget? prefix;
   final TextCapitalization textCapitalization;
   final List<TextInputFormatter>? inputFormatters;
-  final Color? textColor,
-      enabledColor,
-      disabledColor,
-      errorColor,
-      focusedColor,
-      cursorColor;
+  final Color? textColor;
+  final Color? enabledColor;
+  final Color? disabledColor;
+  final Color? errorColor;
+  final Color? focusedColor;
+  final Color? cursorColor;
   final FontWeight fontWeight;
+  final Color? labelOrHintColor;
+  final bool isHintText;
   const UnderlineTextField({
     required this.label,
     super.key,
@@ -57,6 +63,8 @@ class UnderlineTextField extends StatelessWidget {
     this.focusedColor,
     this.fontWeight = FontWeight.w500,
     this.cursorColor,
+    this.labelOrHintColor,
+    this.isHintText = false,
   });
 
   @override
@@ -90,7 +98,7 @@ class UnderlineTextField extends StatelessWidget {
         ),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: enabledColor ?? context.colorScheme.onSecondary,
+            color: enabledColor ?? context.colorScheme.outline,
           ),
         ),
         focusedBorder: UnderlineInputBorder(
@@ -112,9 +120,11 @@ class UnderlineTextField extends StatelessWidget {
         errorMaxLines: errorMaxLines,
         suffixIcon: suffix,
         suffixIconConstraints: const BoxConstraints(minHeight: 12),
-        labelText: label,
-        prefix: prefix,
-        labelStyle: TextStyle(color: context.colorScheme.onSecondary),
+        labelText: !isHintText ? label : null,
+        hintText: isHintText ? label : null,
+        hintStyle: TextStyle(color: labelOrHintColor),
+        prefixIcon: prefix,
+        labelStyle: TextStyle(color: labelOrHintColor),
         isDense: isDense,
       ),
     );

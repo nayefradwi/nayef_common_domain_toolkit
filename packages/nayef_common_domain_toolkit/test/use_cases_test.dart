@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'use_cases.dart';
 
 void main() {
-  test("should return double", () {
+  test('should return double', () {
     final useCase = DoubleUseCase();
     final result = useCase.call(param: 2);
     expect(result.isSuccess, true);
@@ -12,7 +12,7 @@ void main() {
     expect(data, 4);
   });
 
-  test("should return done", () async {
+  test('should return done', () async {
     final useCase = FutureUseCase();
     final result = await useCase.call();
     expect(result.isSuccess, true);
@@ -20,7 +20,7 @@ void main() {
     expect(data, 'done');
   });
 
-  test("should return error", () async {
+  test('should return error', () async {
     final useCase = FutureThrowsUseCase();
     final result = await useCase.call();
     expect(result.isError, true);
@@ -28,7 +28,7 @@ void main() {
     expect(err, isA<UnknownError>());
   });
 
-  test("should return error", () {
+  test('should return error', () {
     final useCase = ThrowsUseCase();
     final result = useCase.call();
     expect(result.isError, true);
@@ -36,13 +36,13 @@ void main() {
     expect(err, isA<UnknownError>());
   });
 
-  test("should return stream", () async {
+  test('should return stream', () async {
     final useCase = StreamUseCase();
     final stream = useCase.stream;
     final results = <Result<num>>[];
-    stream.listen((result) => results.add(result));
+    stream.listen(results.add);
     useCase.startStream();
-    await Future.delayed(Duration(seconds: 1));
+    await Future<void>.delayed(const Duration(seconds: 1));
     expect(results.length, 5);
     expect(results[0].isSuccess, true);
     expect(results[1].isSuccess, true);

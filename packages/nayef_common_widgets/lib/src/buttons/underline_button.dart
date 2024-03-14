@@ -5,15 +5,19 @@ class UnderlineButton extends StatelessWidget {
   final bool isLoading;
   final String label;
   final void Function()? onClick;
-  final double progressSize, progressStrokeWidth, fontSize;
+  final double progressSize;
+  final double progressStrokeWidth;
+  final double fontSize;
   final FontWeight fontWeight;
   final EdgeInsets padding;
   final Color? foregroundColor;
-  final IconData? prefixIcon, suffixIcon;
-  final Widget? prefix, suffix;
+  final IconData? prefixIcon;
+  final IconData? suffixIcon;
+  final Widget? prefix;
+  final Widget? suffix;
   const UnderlineButton({
-    super.key,
     required this.label,
+    super.key,
     this.onClick,
     this.isLoading = false,
     this.padding = const EdgeInsets.symmetric(horizontal: 16),
@@ -26,7 +30,14 @@ class UnderlineButton extends StatelessWidget {
     this.prefix,
     this.suffixIcon,
     this.suffix,
-  }) : assert(prefixIcon == null || prefix == null);
+  })  : assert(
+          prefixIcon == null || prefix == null,
+          'You can only provide either prefixIcon or prefix, not both',
+        ),
+        assert(
+          suffixIcon == null || suffix == null,
+          'You can only provide either suffixIcon or suffix, not both',
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +76,10 @@ class _ButtonRowRow extends StatelessWidget {
     this.suffix,
   });
 
-  final IconData? prefixIcon, suffixIcon;
-  final Widget? prefix, suffix;
+  final IconData? prefixIcon;
+  final IconData? suffixIcon;
+  final Widget? prefix;
+  final Widget? suffix;
   final String label;
   final double fontSize;
   final FontWeight fontWeight;
@@ -151,7 +164,7 @@ class _LoadingIndicator extends StatelessWidget {
       width: progressSize,
       child: CircularProgressIndicator(
         strokeWidth: progressStrokeWidth,
-        color: foregroundColor ?? context.colorScheme.onPrimary,
+        color: foregroundColor ?? context.colorScheme.primary,
       ),
     );
   }

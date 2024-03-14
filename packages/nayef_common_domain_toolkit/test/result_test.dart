@@ -3,10 +3,10 @@ import 'package:test/test.dart';
 import 'use_cases.dart';
 
 void main() {
-  test("should call on success from fold", () {
+  test('should call on success from fold', () {
     final useCase = DoubleUseCase();
     final result = useCase.call(param: 2);
-    String actual = '';
+    var actual = '';
     result.fold(
       onSuccess: (data) => actual = 'success',
       onError: (error) => actual = 'error',
@@ -14,10 +14,10 @@ void main() {
     expect(actual, 'success');
   });
 
-  test("should call on error from fold", () {
+  test('should call on error from fold', () {
     final useCase = ThrowsUseCase();
     final result = useCase.call();
-    String actual = '';
+    var actual = '';
     result.fold(
       onSuccess: (data) => actual = 'success',
       onError: (error) => actual = 'error',
@@ -25,10 +25,10 @@ void main() {
     expect(actual, 'error');
   });
 
-  test("should catch exception and call on error from fold", () {
+  test('should catch exception and call on error from fold', () {
     final useCase = DoubleUseCase();
     final result = useCase.call(param: 2);
-    String actual = '';
+    var actual = '';
     result.fold(
       onSuccess: (data) => throw Exception('error'),
       onError: (error) => actual = 'error',

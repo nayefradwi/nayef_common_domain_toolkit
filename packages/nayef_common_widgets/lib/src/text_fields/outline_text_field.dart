@@ -7,27 +7,34 @@ class OutlineTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final Widget? suffix;
-  final bool isObscureText, isDense;
+  final bool isObscureText;
+  final bool isDense;
   final String? errorMessage;
   final TextInputAction? textInputAction;
   final void Function(String value)? onSubmitted;
   final void Function(String value)? onChanged;
   final void Function()? onEditingComplete;
   final List<String>? autofillHints;
-  final int? maxLines, errorMaxLines;
-  final bool isReadOnly, isEnabled, autofocus;
+  final int? maxLines;
+  final int? errorMaxLines;
+  final bool isReadOnly;
+  final bool isEnabled;
+  final bool autofocus;
   final FocusNode? focusNode;
   final Widget? prefix;
   final TextCapitalization textCapitalization;
   final List<TextInputFormatter>? inputFormatters;
-  final Color? textColor,
-      enabledColor,
-      disabledColor,
-      errorColor,
-      focusedColor,
-      cursorColor;
+  final Color? textColor;
+  final Color? enabledColor;
+  final Color? disabledColor;
+  final Color? errorColor;
+  final Color? focusedColor;
+  final Color? cursorColor;
   final FontWeight fontWeight;
   final bool hideInActiveBorder;
+  final double radius;
+  final Color? labelOrHintColor;
+  final bool isHintText;
   const OutlineTextField({
     required this.label,
     super.key,
@@ -59,10 +66,14 @@ class OutlineTextField extends StatelessWidget {
     this.fontWeight = FontWeight.w500,
     this.hideInActiveBorder = false,
     this.cursorColor,
+    this.radius = 14,
+    this.labelOrHintColor,
+    this.isHintText = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    final borderRadius = BorderRadius.circular(radius);
     return TextField(
       textCapitalization: textCapitalization,
       focusNode: focusNode,
@@ -86,26 +97,31 @@ class OutlineTextField extends StatelessWidget {
       ),
       decoration: InputDecoration(
         disabledBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
           borderSide: BorderSide(
             color: disabledColor ?? context.colorScheme.outline,
           ),
         ),
         enabledBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
           borderSide: BorderSide(
             color: enabledColor ?? context.colorScheme.onSecondary,
           ),
         ),
         focusedBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
           borderSide: BorderSide(
             color: focusedColor ?? context.colorScheme.onBackground,
           ),
         ),
         errorBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
           borderSide: BorderSide(
             color: errorColor ?? context.colorScheme.error,
           ),
         ),
         focusedErrorBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
           borderSide: BorderSide(
             color: errorColor ?? context.colorScheme.error,
           ),
@@ -114,9 +130,11 @@ class OutlineTextField extends StatelessWidget {
         errorMaxLines: errorMaxLines,
         suffixIcon: suffix,
         suffixIconConstraints: const BoxConstraints(minHeight: 12),
-        labelText: label,
-        prefix: prefix,
-        labelStyle: TextStyle(color: context.colorScheme.onSecondary),
+        labelText: !isHintText ? label : null,
+        hintText: isHintText ? label : null,
+        hintStyle: TextStyle(color: labelOrHintColor),
+        prefixIcon: prefix,
+        labelStyle: TextStyle(color: labelOrHintColor),
         isDense: isDense,
       ),
     );

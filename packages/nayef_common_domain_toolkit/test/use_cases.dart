@@ -11,7 +11,7 @@ class FutureUseCase with IFutureUseCase<String, void> {
 
   @override
   FutureResult<String> execute(void param) async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future<void>.delayed(const Duration(seconds: 1));
     return Result.success('done');
   }
 }
@@ -22,7 +22,7 @@ class FutureThrowsUseCase with IFutureUseCase<void, void> {
 
   @override
   FutureResult<void> execute(void param) async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future<void>.delayed(const Duration(seconds: 1));
     throw Exception('error');
   }
 }

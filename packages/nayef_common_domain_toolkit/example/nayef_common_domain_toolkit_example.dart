@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:nayef_common_domain_toolkit/nayef_common_domain_toolkit.dart';
 
 class AddTwoUseCase with IUseCase<int, int> {
@@ -23,7 +25,7 @@ class StreamEvenNumbersUseCase with IStreamUseCase<int, void> {
 
   @override
   void processStream(void _) {
-    for (int i = 0; i < 10; i++) {
+    for (var i = 0; i < 10; i++) {
       final mapped = mapper.from(i);
       if (mapped.isEven) {
         emit(Result.success(mapped));
@@ -38,23 +40,22 @@ class WillReturnIn5SecondsUseCase with IFutureUseCase<int, void> {
 
   @override
   FutureResult<int> execute(void _) async {
-    await Future.delayed(Duration(seconds: 5));
+    await Future<void>.delayed(const Duration(seconds: 5));
     return Result.success(5);
   }
 }
 
 void main() async {
   final useCase = AddTwoUseCase();
-  final result = useCase.call(param: 2);
-  result.fold(
-    onSuccess: (data) => print("new result is: $data"),
-    onError: (_) {},
-  );
+  useCase.call(param: 2).fold(
+        onSuccess: (data) => print('new result is: $data'),
+        onError: (_) {},
+      );
 
   final steamUseCase = StreamEvenNumbersUseCase();
   steamUseCase.stream.listen((result) {
     result.fold(
-      onSuccess: (data) => print("stream prints: $data"),
+      onSuccess: (data) => print('stream prints: $data'),
       onError: (_) {},
     );
   });
@@ -62,7 +63,7 @@ void main() async {
   final futureUseCase = WillReturnIn5SecondsUseCase();
   final futureResult = await futureUseCase.call();
   futureResult.fold(
-    onSuccess: (data) => print("future result is: $data"),
+    onSuccess: (data) => print('future result is: $data'),
     onError: (_) {},
   );
 }

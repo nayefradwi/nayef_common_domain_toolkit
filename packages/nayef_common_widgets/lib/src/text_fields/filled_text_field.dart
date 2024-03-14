@@ -7,21 +7,31 @@ class FilledTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final Widget? suffix;
-  final bool isObscureText, isDense;
+  final bool isObscureText;
+  final bool isDense;
   final String? errorMessage;
   final TextInputAction? textInputAction;
   final void Function(String value)? onSubmitted;
   final void Function(String value)? onChanged;
   final void Function()? onEditingComplete;
   final List<String>? autofillHints;
-  final int? maxLines, errorMaxLines;
-  final bool isReadOnly, isEnabled, autofocus;
+  final int? maxLines;
+  final int? errorMaxLines;
+  final bool isReadOnly;
+  final bool isEnabled;
+  final bool autofocus;
   final FocusNode? focusNode;
   final Widget? prefix;
   final TextCapitalization textCapitalization;
   final List<TextInputFormatter>? inputFormatters;
-  final Color? textColor, cursorColor, fillColor;
+  final Color? textColor;
+  final Color? fillColor;
+  final Color? cursorColor;
+  final Color? labelOrHintColor;
   final FontWeight fontWeight;
+  final bool hideInActiveBorder;
+  final double radius;
+  final bool isHintText;
   const FilledTextField({
     required this.label,
     super.key,
@@ -46,13 +56,21 @@ class FilledTextField extends StatelessWidget {
     this.prefix,
     this.textCapitalization = TextCapitalization.none,
     this.textColor,
-    this.fontWeight = FontWeight.w500,
-    this.cursorColor,
     this.fillColor,
+    this.fontWeight = FontWeight.w500,
+    this.hideInActiveBorder = false,
+    this.cursorColor,
+    this.radius = 14,
+    this.isHintText = false,
+    this.labelOrHintColor,
   });
 
   @override
   Widget build(BuildContext context) {
+    final border = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(radius),
+      borderSide: const BorderSide(color: Colors.transparent),
+    );
     return TextField(
       textCapitalization: textCapitalization,
       focusNode: focusNode,
@@ -75,21 +93,22 @@ class FilledTextField extends StatelessWidget {
         color: textColor ?? context.colorScheme.onBackground,
       ),
       decoration: InputDecoration(
-        disabledBorder: const OutlineInputBorder(borderSide: BorderSide.none),
-        enabledBorder: const OutlineInputBorder(borderSide: BorderSide.none),
-        focusedBorder: const OutlineInputBorder(borderSide: BorderSide.none),
-        errorBorder: const OutlineInputBorder(borderSide: BorderSide.none),
-        focusedErrorBorder: const OutlineInputBorder(
-          borderSide: BorderSide.none,
-        ),
+        border: border,
+        enabledBorder: border,
+        focusedBorder: border,
+        disabledBorder: border,
+        errorBorder: border,
         fillColor: fillColor,
+        filled: fillColor != null,
         errorText: errorMessage,
         errorMaxLines: errorMaxLines,
         suffixIcon: suffix,
         suffixIconConstraints: const BoxConstraints(minHeight: 12),
-        labelText: label,
-        prefix: prefix,
-        labelStyle: TextStyle(color: context.colorScheme.onSecondary),
+        labelText: !isHintText ? label : null,
+        hintText: isHintText ? label : null,
+        hintStyle: TextStyle(color: labelOrHintColor),
+        prefixIcon: prefix,
+        labelStyle: TextStyle(color: labelOrHintColor),
         isDense: isDense,
       ),
     );

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'result.dart';
+import 'package:nayef_common_domain_toolkit/src/domain/result.dart';
 
 mixin IUseCase<T, P> {
   Result<T> call({required P param}) {

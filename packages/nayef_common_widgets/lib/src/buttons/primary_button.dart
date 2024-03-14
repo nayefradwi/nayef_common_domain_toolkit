@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:nayef_common_widgets/src/context_extension.dart';
 
-class FilledButton extends StatelessWidget {
+class PrimaryButton extends StatelessWidget {
   final bool isLoading;
   final String label;
   final void Function()? onClick;
-  final double radius, progressSize, progressStrokeWidth, fontSize;
+  final double radius;
+  final double progressSize;
+  final double progressStrokeWidth;
+  final double fontSize;
   final FontWeight fontWeight;
-  final EdgeInsets innerPadding, padding;
-  final Color? backgroundColor, foregroundColor;
+  final EdgeInsets innerPadding;
+  final EdgeInsets padding;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
   final BorderSide? borderSide;
-  final IconData? prefixIcon, suffixIcon;
-  final Widget? prefix, suffix;
-  final bool fillWidth, isCompact;
-  const FilledButton({
-    super.key,
+  final IconData? prefixIcon;
+  final IconData? suffixIcon;
+  final Widget? prefix;
+  final Widget? suffix;
+  final bool fillWidth;
+  final bool isCompact;
+  const PrimaryButton({
     required this.label,
+    super.key,
     this.onClick,
     this.isLoading = false,
-    this.radius = 12,
+    this.radius = 16,
     this.innerPadding = const EdgeInsets.symmetric(
       horizontal: 16,
       vertical: 12,
@@ -37,7 +45,14 @@ class FilledButton extends StatelessWidget {
     this.prefix,
     this.suffixIcon,
     this.suffix,
-  }) : assert(prefixIcon == null || prefix == null);
+  })  : assert(
+          prefixIcon == null || prefix == null,
+          'You can only provide either prefixIcon or prefix, not both',
+        ),
+        assert(
+          suffixIcon == null || suffix == null,
+          'You can only provide either suffixIcon or suffix, not both',
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +102,10 @@ class _ButtonRowRow extends StatelessWidget {
     this.suffix,
   });
 
-  final IconData? prefixIcon, suffixIcon;
-  final Widget? prefix, suffix;
+  final IconData? prefixIcon;
+  final IconData? suffixIcon;
+  final Widget? prefix;
+  final Widget? suffix;
   final String label;
   final double fontSize;
   final FontWeight fontWeight;
@@ -142,7 +159,8 @@ class _PrimaryButton extends StatelessWidget {
   final double progressSize;
   final double progressStrokeWidth;
   final Widget child;
-  final Color backgroundColor, foregroundColor;
+  final Color backgroundColor;
+  final Color foregroundColor;
   final BorderSide? borderSide;
   final bool isCompact;
 

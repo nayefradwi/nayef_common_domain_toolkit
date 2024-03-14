@@ -1,9 +1,6 @@
 name: nayef_common_widgets
-description: "A commons widgets for Nayef's projects. This package has simple widgets that are just built 
-on top of Flutter's widgets to make it slightly easier to use them. They basically export most used options in widgets and then use defaults that prefill 
-the most common options. This package is not meant to be a full UI kit, but rather a set of widgets that are used in most of Nayef's projects."
+description: "A commons widgets for Nayef's projects. This package has simple widgets that are just built"
 version: 0.0.1
-homepage:
 
 environment:
   sdk: ">=3.2.6 <4.0.0"
@@ -16,7 +13,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

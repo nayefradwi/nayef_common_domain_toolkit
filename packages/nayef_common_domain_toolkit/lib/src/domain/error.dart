@@ -1,6 +1,6 @@
-import '../../nayef_common_domain_toolkit.dart';
+import 'package:nayef_common_domain_toolkit/nayef_common_domain_toolkit.dart';
 
-const String unknownErrorCode = "unknown_error";
+const String unknownErrorCode = 'unknown_error';
 
 abstract class ResultError {
   final String message;
@@ -18,7 +18,8 @@ abstract class ResultError {
 
   @override
   String toString() {
-    return 'message: $message, code: $code, statusCode: $statusCode\nstackTrace: $stackTrace';
+    return 'message: $message, code: $code, '
+        'statusCode: $statusCode\nstackTrace: $stackTrace';
   }
 }
 
@@ -32,7 +33,7 @@ class ServerError extends ResultError {
 
 class UnknownError extends ResultError {
   UnknownError({
-    String message = "unknown error",
+    String message = 'unknown error',
     super.code = unknownErrorCode,
     super.statusCode = 0,
   }) : super(

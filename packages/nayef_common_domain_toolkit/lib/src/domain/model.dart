@@ -9,7 +9,8 @@ abstract class PaginatedModel<T> {
 }
 
 class LimitOffsetPage<T> extends PaginatedModel<T> {
-  int offset, limit;
+  int offset;
+  int limit;
   LimitOffsetPage({
     required super.items,
     required this.offset,
@@ -41,7 +42,8 @@ class CursorPage<T> extends PaginatedModel<T> {
 }
 
 class DoubleCursorPage<T> extends PaginatedModel<T> {
-  String? before, after;
+  String? before;
+  String? after;
   DoubleCursorPage({
     required super.items,
     required this.before,
