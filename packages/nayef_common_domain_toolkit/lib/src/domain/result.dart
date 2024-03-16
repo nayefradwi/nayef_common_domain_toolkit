@@ -36,6 +36,16 @@ abstract class Result<T> {
       return onError(UnknownError(message: e.toString()));
     }
   }
+
+  T? tryGetData() {
+    if (isSuccess) return (this as ResultWithData<T>).data;
+    return null;
+  }
+
+  ResultError? tryGetError() {
+    if (isError) return (this as ResultWithError<T>).error;
+    return null;
+  }
 }
 
 class ResultWithData<T> extends Result<T> {
