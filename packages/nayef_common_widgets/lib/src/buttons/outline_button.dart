@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nayef_common_widgets/src/buttons/button_loading_indicator.dart';
 import 'package:nayef_common_widgets/src/context_extension.dart';
 
 class OutlineButton extends StatelessWidget {
@@ -21,6 +22,7 @@ class OutlineButton extends StatelessWidget {
   final bool fillWidth;
   final bool isCompact;
   final double stroke;
+  final TextScaler? textScaler;
   const OutlineButton({
     required this.label,
     super.key,
@@ -44,6 +46,7 @@ class OutlineButton extends StatelessWidget {
     this.stroke = 1,
     this.prefix,
     this.suffixIcon,
+    this.textScaler,
     this.suffix,
   })  : assert(
           prefixIcon == null || prefix == null,
@@ -83,6 +86,7 @@ class OutlineButton extends StatelessWidget {
               prefix: prefix,
               suffix: suffix,
               suffixIcon: suffixIcon,
+              textScaler: textScaler,
             ),
           ),
         ],
@@ -100,6 +104,7 @@ class _ButtonRowRow extends StatelessWidget {
     this.prefix,
     this.suffixIcon,
     this.suffix,
+    this.textScaler,
   });
 
   final IconData? prefixIcon;
@@ -109,6 +114,7 @@ class _ButtonRowRow extends StatelessWidget {
   final String label;
   final double fontSize;
   final FontWeight fontWeight;
+  final TextScaler? textScaler;
 
   @override
   Widget build(BuildContext context) {
@@ -122,6 +128,7 @@ class _ButtonRowRow extends StatelessWidget {
         Flexible(
           child: Text(
             label,
+            textScaler: textScaler,
             style: TextStyle(
               fontSize: fontSize,
               fontWeight: fontWeight,
@@ -182,36 +189,12 @@ class _PrimaryButton extends StatelessWidget {
         padding: innerPadding,
       ),
       child: isLoading
-          ? _LoadingIndicator(
+          ? ButtonLoadingIndicator(
               progressSize: progressSize,
               progressStrokeWidth: progressStrokeWidth,
               foregroundColor: foregroundColor,
             )
           : child,
-    );
-  }
-}
-
-class _LoadingIndicator extends StatelessWidget {
-  const _LoadingIndicator({
-    required this.progressSize,
-    required this.progressStrokeWidth,
-    this.foregroundColor,
-  });
-
-  final double progressSize;
-  final double progressStrokeWidth;
-  final Color? foregroundColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: progressSize,
-      width: progressSize,
-      child: CircularProgressIndicator(
-        strokeWidth: progressStrokeWidth,
-        color: foregroundColor ?? context.colorScheme.primary,
-      ),
     );
   }
 }

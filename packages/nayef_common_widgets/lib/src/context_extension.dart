@@ -6,4 +6,5 @@ extension CommonContextExtension on BuildContext {
   Size get size => MediaQuery.of(this).size;
   double get deviceWidth => size.width;
   double get deviceHeight => size.height;
+  EdgeInsets get padding => MediaQuery.of(this).padding;
 }

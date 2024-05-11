@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nayef_common_widgets/src/buttons/button_loading_indicator.dart';
 import 'package:nayef_common_widgets/src/context_extension.dart';
 
 class UnderlineButton extends StatelessWidget {
@@ -136,36 +137,12 @@ class _PrimaryButton extends StatelessWidget {
     return InkWell(
       onTap: isLoading ? null : onClick,
       child: isLoading
-          ? _LoadingIndicator(
+          ? ButtonLoadingIndicator(
               progressSize: progressSize,
               progressStrokeWidth: progressStrokeWidth,
               foregroundColor: foregroundColor,
             )
           : child,
-    );
-  }
-}
-
-class _LoadingIndicator extends StatelessWidget {
-  const _LoadingIndicator({
-    required this.progressSize,
-    required this.progressStrokeWidth,
-    this.foregroundColor,
-  });
-
-  final double progressSize;
-  final double progressStrokeWidth;
-  final Color? foregroundColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: progressSize,
-      width: progressSize,
-      child: CircularProgressIndicator(
-        strokeWidth: progressStrokeWidth,
-        color: foregroundColor ?? context.colorScheme.primary,
-      ),
     );
   }
 }
