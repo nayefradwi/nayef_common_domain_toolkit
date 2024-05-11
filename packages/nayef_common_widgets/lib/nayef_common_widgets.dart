@@ -1,3 +1,4 @@
+export 'src/app_divider.dart';
 export 'src/app_image.dart';
 export 'src/app_network_image.dart';
 export 'src/buttons/button_loading_indicator.dart';
@@ -13,6 +14,7 @@ export 'src/text_fields/filled_text_field.dart';
 export 'src/text_fields/ghost_text_field.dart';
 export 'src/text_fields/outline_text_field.dart';
 export 'src/text_fields/underline_text_field.dart';
+
 
 /*
 * This should have basic widgets that can be used in multiple projects

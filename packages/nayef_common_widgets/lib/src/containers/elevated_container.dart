@@ -10,11 +10,13 @@ class ElevatedContainer extends StatelessWidget {
   final double borderRadius;
   final double blurRadius;
   final BoxConstraints constraints;
+  final double borderWidth;
   const ElevatedContainer({
     required this.child,
     super.key,
     this.shadowColor,
     this.backgroundColor,
+    this.borderWidth = 0.7,
     this.padding = const EdgeInsets.all(8),
     this.margin,
     this.borderRadius = 8,
@@ -33,7 +35,7 @@ class ElevatedContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(
           color: shadowColor ?? context.colorScheme.shadow,
-          width: 0.7,
+          width: borderWidth,
         ),
         boxShadow: [
           BoxShadow(

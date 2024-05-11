@@ -11,6 +11,7 @@ class OutlinedContainer extends StatelessWidget {
     this.height,
     this.width,
     this.color,
+    this.borderWidth = 0.7,
   });
 
   final Widget child;
@@ -20,6 +21,7 @@ class OutlinedContainer extends StatelessWidget {
   final double? height;
   final double? width;
   final Color? color;
+  final double borderWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,10 @@ class OutlinedContainer extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         color: color ?? context.colorScheme.background,
-        border: Border.all(color: context.colorScheme.outline),
+        border: Border.all(
+          color: context.colorScheme.outline,
+          width: borderWidth,
+        ),
         borderRadius: BorderRadius.circular(borderRadius),
       ),
       child: child,
