@@ -98,6 +98,8 @@ class _AssetImage extends StatelessWidget {
       alignment: alignment,
       repeat: repeat,
       errorBuilder: errorBuilder,
+      cacheHeight: height?.toInt(),
+      cacheWidth: width?.toInt(),
     );
   }
 }

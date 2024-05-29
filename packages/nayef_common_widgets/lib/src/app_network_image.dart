@@ -99,6 +99,8 @@ class _NetworkImage extends StatelessWidget {
       imageUrl: url,
       width: width,
       height: height,
+      memCacheHeight: height?.toInt(),
+      memCacheWidth: width?.toInt(),
       color: color,
       colorBlendMode: blendMode,
       fit: fit,
