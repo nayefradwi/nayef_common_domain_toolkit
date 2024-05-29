@@ -1,6 +1,6 @@
 name: nayef_common_widgets
 description: "A commons widgets for Nayef's projects. This package has simple widgets that are just built"
-version: 0.0.1
+version: 0.1.0
 
 environment:
   sdk: ">=3.2.6 <4.0.0"
