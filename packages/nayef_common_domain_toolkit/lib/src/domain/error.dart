@@ -44,6 +44,7 @@ class UnknownError extends ResultError {
 
 class DomainError extends ResultError {
   DomainError(super.message);
+  DomainError.withCode(super.message, {super.code});
 }
 
 class ValidationError extends ResultError {

@@ -1,3 +1,6 @@
+const defaultLimit = 10;
+const defaultOffset = 0;
+
 abstract class PaginatedModel<T> {
   List<T> items;
   bool hasNextPage;
@@ -6,6 +9,10 @@ abstract class PaginatedModel<T> {
     required this.items,
     required this.hasNextPage,
   });
+
+  void insert(T item) {
+    items.insert(0, item);
+  }
 }
 
 class LimitOffsetPage<T> extends PaginatedModel<T> {
@@ -17,6 +24,15 @@ class LimitOffsetPage<T> extends PaginatedModel<T> {
     required this.limit,
     required super.hasNextPage,
   });
+
+  factory LimitOffsetPage.withSingleItem(T item) {
+    return LimitOffsetPage(
+      items: [item],
+      offset: defaultOffset,
+      limit: defaultLimit,
+      hasNextPage: false,
+    );
+  }
 
   void merge(LimitOffsetPage<T> other) {
     items.addAll(other.items);
@@ -34,6 +50,14 @@ class CursorPage<T> extends PaginatedModel<T> {
     required super.hasNextPage,
   });
 
+  factory CursorPage.withSingleItem(T item) {
+    return CursorPage(
+      items: [item],
+      cursor: null,
+      hasNextPage: false,
+    );
+  }
+
   void merge(CursorPage<T> other) {
     items.addAll(other.items);
     cursor = other.cursor;
@@ -50,6 +74,15 @@ class DoubleCursorPage<T> extends PaginatedModel<T> {
     required this.after,
     required super.hasNextPage,
   });
+
+  factory DoubleCursorPage.withSingleItem(T item) {
+    return DoubleCursorPage(
+      items: [item],
+      before: null,
+      after: null,
+      hasNextPage: false,
+    );
+  }
 
   void merge(DoubleCursorPage<T> other) {
     items.addAll(other.items);
