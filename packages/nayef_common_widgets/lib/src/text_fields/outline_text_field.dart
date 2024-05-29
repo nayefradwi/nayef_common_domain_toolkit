@@ -93,7 +93,7 @@ class OutlineTextField extends StatelessWidget {
       cursorColor: cursorColor,
       style: TextStyle(
         fontWeight: fontWeight,
-        color: textColor ?? context.colorScheme.onBackground,
+        color: textColor ?? context.colorScheme.surface,
       ),
       decoration: InputDecoration(
         disabledBorder: OutlineInputBorder(
@@ -111,7 +111,7 @@ class OutlineTextField extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
           borderSide: BorderSide(
-            color: focusedColor ?? context.colorScheme.onBackground,
+            color: focusedColor ?? context.colorScheme.surface,
           ),
         ),
         errorBorder: OutlineInputBorder(

@@ -31,7 +31,7 @@ class ElevatedContainer extends StatelessWidget {
       margin: margin,
       constraints: constraints,
       decoration: BoxDecoration(
-        color: backgroundColor ?? context.colorScheme.background,
+        color: backgroundColor ?? context.colorScheme.surface,
         borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(
           color: shadowColor ?? context.colorScheme.shadow,

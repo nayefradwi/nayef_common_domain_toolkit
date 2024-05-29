@@ -88,7 +88,7 @@ class UnderlineTextField extends StatelessWidget {
       cursorColor: cursorColor,
       style: TextStyle(
         fontWeight: fontWeight,
-        color: textColor ?? context.colorScheme.onBackground,
+        color: textColor ?? context.colorScheme.surface,
       ),
       decoration: InputDecoration(
         disabledBorder: UnderlineInputBorder(
@@ -103,7 +103,7 @@ class UnderlineTextField extends StatelessWidget {
         ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: focusedColor ?? context.colorScheme.onBackground,
+            color: focusedColor ?? context.colorScheme.surface,
           ),
         ),
         errorBorder: UnderlineInputBorder(

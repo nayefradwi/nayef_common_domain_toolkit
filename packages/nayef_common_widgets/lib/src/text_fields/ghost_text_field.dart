@@ -81,7 +81,7 @@ class GhostTextField extends StatelessWidget {
       cursorColor: cursorColor,
       style: TextStyle(
         fontWeight: fontWeight,
-        color: textColor ?? context.colorScheme.onBackground,
+        color: textColor ?? context.colorScheme.surface,
       ),
       decoration: InputDecoration(
         disabledBorder: const OutlineInputBorder(borderSide: BorderSide.none),

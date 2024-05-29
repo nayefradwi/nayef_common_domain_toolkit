@@ -74,7 +74,7 @@ class OutlineButton extends StatelessWidget {
             isLoading: isLoading,
             progressSize: progressSize,
             progressStrokeWidth: progressStrokeWidth,
-            backgroundColor: backgroundColor ?? context.colorScheme.background,
+            backgroundColor: backgroundColor ?? context.colorScheme.surface,
             foregroundColor: foregroundColor ?? context.colorScheme.primary,
             isCompact: isCompact,
             stroke: stroke,

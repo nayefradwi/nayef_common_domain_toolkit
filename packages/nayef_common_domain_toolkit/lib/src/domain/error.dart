@@ -13,7 +13,7 @@ abstract class ResultError {
     this.statusCode = 0,
     this.stackTrace,
   }) {
-    logger.severe(message, this, stackTrace);
+    logger.error(message, error: this, stack: stackTrace);
   }
 
   @override

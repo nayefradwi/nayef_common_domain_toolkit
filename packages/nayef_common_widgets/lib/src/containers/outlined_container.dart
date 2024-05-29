@@ -31,7 +31,7 @@ class OutlinedContainer extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-        color: color ?? context.colorScheme.background,
+        color: color ?? context.colorScheme.surface,
         border: Border.all(
           color: context.colorScheme.outline,
           width: borderWidth,
