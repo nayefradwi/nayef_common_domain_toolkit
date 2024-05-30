@@ -8,3 +8,6 @@
 
 # 1.0.2
 - created dio mixins for adding more functionalities for posting a file
+
+# 1.0.3
+- exporting dio extensions
