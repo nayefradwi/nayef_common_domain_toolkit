@@ -1,6 +1,6 @@
 name: nayef_common_data_toolkit
 description: "A new Flutter package project."
-version: 1.0.1
+version: 1.0.2
 publish_to: none
 
 environment:
@@ -11,6 +11,7 @@ dependencies:
   dio: ^5.4.3+1
   flutter:
     sdk: flutter
+  http_parser: ^4.0.2
   nayef_common_domain_toolkit:
     git:
       url: https://github.com/nayefradwi/nayef_flutter_dart_commons

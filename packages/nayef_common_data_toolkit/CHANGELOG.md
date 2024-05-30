@@ -5,3 +5,6 @@
 # 1.0.1
 - allowing parser interceptor to be pipelined
 - updated domain common
+
+# 1.0.2
+- created dio mixins for adding more functionalities for posting a file
