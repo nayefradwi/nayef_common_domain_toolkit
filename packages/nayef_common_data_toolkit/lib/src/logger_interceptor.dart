@@ -8,11 +8,11 @@ class LoggerInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     logger
-      ..finest('''
+      ..info('''
     Request: ${options.method} ${options.uri}
     headers: ${options.headers}
     ''')
-      ..finest(options.data.toString());
+      ..info(options.data.toString());
     return super.onRequest(options, handler);
   }
 
@@ -22,12 +22,12 @@ class LoggerInterceptor extends Interceptor {
     ResponseInterceptorHandler handler,
   ) {
     logger
-      ..finest('''
+      ..info('''
     Response:
     status code: ${response.statusCode}
     headers: ${response.headers}
     ''')
-      ..finest(response.data.toString());
+      ..info(response.data.toString());
     return super.onResponse(response, handler);
   }
 
@@ -40,7 +40,7 @@ class LoggerInterceptor extends Interceptor {
     ${err.response?.statusCode}
     ${err.response?.headers}
     ''')
-      ..warning(err.response?.data.toString());
+      ..warning(err.response?.data.toString() ?? '');
     trackError?.call(err);
     return super.onError(err, handler);
   }

@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:nayef_common_data_toolkit/src/api_response.dart';
 import 'package:nayef_common_domain_toolkit/nayef_common_domain_toolkit.dart';
 
-typedef ErrorResponseFactory = ErrorResponse<dynamic> Function(
+typedef ErrorResponseFactory = ErrorResponse<dynamic>? Function(
   DioException error,
 );
 
@@ -22,11 +22,11 @@ class ResponseParser extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    if (err.message != null) logger.warning(err.message);
+    if (err.message != null) logger.warning(err.message!);
     final errorResponse = errorResponseFactory(err);
     final newError = DioException(
       requestOptions: err.requestOptions,
-      response: errorResponse,
+      response: errorResponse ?? err.response,
       error: err.error,
       type: err.type,
     );
