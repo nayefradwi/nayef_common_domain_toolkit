@@ -11,3 +11,8 @@
 ## 1.2.0
 
 - added date util
+
+
+## 1.2.1
+
+- fixed app log

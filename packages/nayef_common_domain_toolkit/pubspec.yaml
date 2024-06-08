@@ -1,6 +1,6 @@
 name: nayef_common_domain_toolkit
 description: A starting point for Dart libraries or applications.
-version: 1.2.0
+version: 1.2.1
 
 environment:
   sdk: ^3.2.6

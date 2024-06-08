@@ -19,7 +19,6 @@ class AppLog {
   static String traceKey = 'trace';
   static String exceptionKey = 'exception';
   static String typeKey = 'type';
-  static String timestampKey = 'timestamp';
 
   late String methodName;
   late String fileName;
@@ -30,7 +29,6 @@ class AppLog {
   String? trace;
   Object? errorObject;
   late StackTrace stack;
-  late DateTime _timestamp;
   late AppLogType type;
 
   AppLog.info({
@@ -46,7 +44,7 @@ class AppLog {
     fileName = file ?? trace.file;
     methodName = method ?? trace.function;
     this.line = line ?? trace.line;
-    _timestamp = DateTime.now();
+    deviceTime = DateTime.now();
     type = AppLogType.info;
   }
 
@@ -63,7 +61,7 @@ class AppLog {
     fileName = file ?? trace.file;
     methodName = method ?? trace.function;
     this.line = line ?? trace.line;
-    _timestamp = DateTime.now();
+    deviceTime = DateTime.now();
     type = AppLogType.info;
   }
 
@@ -80,7 +78,7 @@ class AppLog {
     fileName = file ?? trace.file;
     methodName = method ?? trace.function;
     this.line = line ?? trace.line;
-    _timestamp = DateTime.now();
+    deviceTime = DateTime.now();
     type = AppLogType.info;
   }
 
@@ -98,7 +96,7 @@ class AppLog {
     fileName = file ?? trace.file;
     methodName = method ?? trace.function;
     this.line = line ?? trace.line;
-    _timestamp = DateTime.now();
+    deviceTime = DateTime.now();
     type = AppLogType.error;
     if (text == null) {
       this.text = errorObject.toString();
@@ -123,7 +121,7 @@ class AppLog {
     fileName = file ?? trace.file;
     methodName = method ?? trace.function;
     this.line = line ?? trace.line;
-    _timestamp = DateTime.now();
+    deviceTime = DateTime.now();
     type = AppLogType.debug;
     if (shouldLogTrace) this.trace = this.stack.toString();
   }
@@ -136,7 +134,6 @@ class AppLog {
       methodNameKey: methodName,
       fileNameKey: fileName,
       lineKey: line,
-      timestampKey: _timestamp,
       metadataKey: metadata,
       exceptionKey: errorObject.toString(),
       traceKey: trace,
